@@ -39,47 +39,56 @@ export const HeroSection = () => {
 
   }, []);
 
+  const scrollToCustomization = () => {
+    const customizeSection = document.getElementById('customize');
+    if (customizeSection) {
+      customizeSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 bg-black"></div>
       
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="floating-element absolute top-20 left-10 w-4 h-4 bg-yellow-500 rounded-full opacity-20"></div>
-        <div className="floating-element absolute top-40 right-20 w-6 h-6 bg-yellow-400 rounded-full opacity-15"></div>
-        <div className="floating-element absolute bottom-40 left-20 w-8 h-8 bg-yellow-600 rounded-full opacity-10"></div>
-        <div className="floating-element absolute bottom-20 right-10 w-3 h-3 bg-yellow-500 rounded-full opacity-25"></div>
+        <div className="floating-element absolute top-20 left-4 sm:left-10 w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full opacity-20"></div>
+        <div className="floating-element absolute top-32 sm:top-40 right-4 sm:right-20 w-4 h-4 sm:w-6 sm:h-6 bg-yellow-400 rounded-full opacity-15"></div>
+        <div className="floating-element absolute bottom-32 sm:bottom-40 left-4 sm:left-20 w-6 h-6 sm:w-8 sm:h-8 bg-yellow-600 rounded-full opacity-10"></div>
+        <div className="floating-element absolute bottom-16 sm:bottom-20 right-4 sm:right-10 w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full opacity-25"></div>
       </div>
 
-      <div ref={heroRef} className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <div ref={titleRef} className="mb-6">
-          <h1 className="text-6xl md:text-8xl font-bold leading-tight">
-            <span className="bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent">
+      <div ref={heroRef} className="relative z-10 text-center w-full max-w-5xl mx-auto">
+        <div ref={titleRef} className="mb-6 sm:mb-8 lg:mb-12">
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight sm:leading-tight">
+            <span className="bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent block">
               REDEFINE
             </span>
-            <br />
-            <span className="text-white">YOUR STYLE</span>
+            <span className="text-white block">YOUR STYLE</span>
           </h1>
         </div>
 
-        <div ref={subtitleRef} className="mb-8">
-          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Experience luxury fashion like never before. Customize, create, and express your unique style with our cutting-edge 3D technology.
+        <div ref={subtitleRef} className="mb-8 sm:mb-10 lg:mb-12">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-2">
+            Experience professional uniform solutions like never before. Customize, create, and express your unique style with our cutting-edge 3D technology.
           </p>
         </div>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+          <button className="w-full sm:w-auto bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105">
             Explore Collection
           </button>
-          <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300">
+          <button 
+            onClick={scrollToCustomization}
+            className="w-full sm:w-auto border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300"
+          >
             Start Customizing
           </button>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ArrowDown className="w-8 h-8 text-yellow-500" />
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
       </div>
     </section>
   );

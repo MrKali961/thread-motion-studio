@@ -13,27 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   useEffect(() => {
-    // Initialize GSAP animations
-    gsap.fromTo('.fade-in', 
-      { opacity: 0, y: 50 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: '.fade-in',
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-
-    // Smooth scrolling
-    gsap.to(window, {
-      scrollTo: { autoKill: false },
-      ease: "power2.inOut"
-    });
+    // Clean up any existing animations
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (

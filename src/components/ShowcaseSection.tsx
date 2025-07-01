@@ -1,23 +1,20 @@
 
 import { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Text, Float } from '@react-three/drei';
+import { OrbitControls, useGLTF, Text, Float, Center } from '@react-three/drei';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ClothingModel = ({ position, rotation, color }: { position: [number, number, number], rotation: [number, number, number], color: string }) => {
+const ClothingModel = ({ modelPath, position, rotation }: { modelPath: string, position: [number, number, number], rotation: [number, number, number] }) => {
+  const { scene } = useGLTF(modelPath);
+  
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh position={position} rotation={rotation}>
-        <boxGeometry args={[1, 1.5, 0.3]} />
-        <meshStandardMaterial color={color} />
-      </mesh>
-      <mesh position={[position[0], position[1] - 0.8, position[2]]} rotation={rotation}>
-        <cylinderGeometry args={[0.3, 0.5, 1]} />
-        <meshStandardMaterial color={color} />
-      </mesh>
+      <Center position={position} rotation={rotation}>
+        <primitive object={scene.clone()} scale={[1.5, 1.5, 1.5]} />
+      </Center>
     </Float>
   );
 };
@@ -44,7 +41,7 @@ export const ShowcaseSection = () => {
       );
 
       // Individual showcase items animations
-      gsap.utils.toArray('.showcase-row').forEach((row: any, index) => {
+      gsap.utils.toArray('.showcase-row').forEach((row: Element, index) => {
         const isEven = index % 2 === 0;
         
         // Animate the 3D canvas
@@ -118,33 +115,34 @@ export const ShowcaseSection = () => {
 
   const showcaseItems = [
     { 
-      title: "Premium Jackets", 
-      description: "Crafted with the finest materials for ultimate comfort and style. Each jacket represents a perfect blend of luxury and functionality.",
-      color: "#FFD700",
-      price: "$299"
+      title: "Restaurant Cook Outfit", 
+      description: "Professional chef attire designed for comfort and functionality in demanding kitchen environments.",
+      modelPath: "/opt-psx_prop_-_restaurant_cook.glb"
     },
     { 
-      title: "Designer Shirts", 
-      description: "Elegant and comfortable shirts that redefine sophistication. Made from premium fabrics with attention to every detail.",
-      color: "#FF6B6B",
-      price: "$149"
+      title: "Gregory Street Outfit", 
+      description: "Modern street style that combines comfort with contemporary urban fashion trends.",
+      modelPath: "/opt-gregory_street_outfit.glb"
     },
     { 
-      title: "Luxury Pants", 
-      description: "Perfect fit meets premium quality in our exclusive collection. Designed for the modern individual who values both style and comfort.",
-      color: "#4ECDC4",
-      price: "$199"
+      title: "Pete's Collection", 
+      description: "Versatile casual wear that adapts to any situation while maintaining a refined aesthetic.",
+      modelPath: "/opt-pete.glb"
     },
     { 
-      title: "Exclusive Dresses", 
-      description: "Timeless elegance captured in every thread. Our dresses are designed to make a statement while ensuring unmatched comfort.",
-      color: "#45B7D1",
-      price: "$349"
+      title: "Business Suit", 
+      description: "Professional formal wear crafted for the modern businessman who demands excellence.",
+      modelPath: "/opt-indian_man_with_suit.glb"
+    },
+    { 
+      title: "Sports Wear", 
+      description: "Athletic apparel engineered for performance with cutting-edge fabric technology.",
+      modelPath: "/opt-man_player.glb"
     },
   ];
 
   return (
-    <section id="collection" ref={sectionRef} className="py-20 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+    <section id="collection" ref={sectionRef} className="py-20 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
@@ -173,15 +171,14 @@ export const ShowcaseSection = () => {
                         <pointLight position={[-10, -10, -10]} intensity={0.6} />
                         <spotLight position={[0, 10, 0]} intensity={0.8} angle={0.3} />
                         <ClothingModel 
+                          modelPath={item.modelPath}
                           position={[0, 0, 0]} 
                           rotation={[0, index * 0.5, 0]}
-                          color={item.color}
                         />
                         <OrbitControls 
                           enableZoom={false} 
-                          autoRotate 
-                          autoRotateSpeed={1.5}
                           enablePan={false}
+                          makeDefault
                         />
                       </Canvas>
                     </div>
@@ -203,9 +200,6 @@ export const ShowcaseSection = () => {
                         <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
                           {item.title}
                         </h3>
-                        <div className="text-2xl font-bold text-yellow-500 mb-6">
-                          {item.price}
-                        </div>
                       </div>
                       
                       <p className="text-lg text-gray-300 leading-relaxed mb-8">
@@ -215,9 +209,6 @@ export const ShowcaseSection = () => {
                       <div className="flex flex-col sm:flex-row gap-4">
                         <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105">
                           View Details
-                        </button>
-                        <button className="border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 hover:text-black transition-all duration-300">
-                          Add to Cart
                         </button>
                       </div>
                     </div>

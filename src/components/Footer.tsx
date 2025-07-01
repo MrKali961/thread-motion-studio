@@ -1,6 +1,6 @@
 
 import { useEffect, useRef } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export const Footer = () => {
@@ -33,20 +33,24 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-                LUXE
+                LOCK UNIFORMS
               </h3>
               <p className="text-gray-400 leading-relaxed">
-                Redefining luxury fashion with cutting-edge technology and timeless design.
+                Professional uniform solutions with cutting-edge technology and timeless design.
               </p>
               <div className="flex space-x-4">
-                {['IG', 'TW', 'FB', 'LI'].map((social) => (
-                  <button
-                    key={social}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300"
-                  >
-                    <span className="text-sm font-bold">{social}</span>
-                  </button>
-                ))}
+                <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                  <Instagram className="w-5 h-5" />
+                </button>
+                <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                  <Twitter className="w-5 h-5" />
+                </button>
+                <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                  <Facebook className="w-5 h-5" />
+                </button>
+                <button className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                  <Linkedin className="w-5 h-5" />
+                </button>
               </div>
             </div>
 
@@ -92,7 +96,7 @@ export const Footer = () => {
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 LUXE. All rights reserved. Crafted with passion.
+              © 2024 The Elites Solutions. All rights reserved. Crafted with passion.
             </p>
             <button
               onClick={scrollToTop}

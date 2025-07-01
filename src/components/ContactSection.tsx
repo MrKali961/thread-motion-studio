@@ -1,7 +1,7 @@
 
 import { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { toast } from 'sonner';
@@ -75,8 +75,27 @@ export const ContactSection = () => {
     reset();
   };
 
+  const handlePhoneCall = () => {
+    window.location.href = 'tel:+15551234567';
+  };
+
+  const handleEmailCopy = async () => {
+    try {
+      await navigator.clipboard.writeText('hello@lockuniforms.com');
+      toast.success('Email address copied to clipboard!');
+    } catch (err) {
+      toast.error('Failed to copy email address');
+    }
+  };
+
+  const handleMapOpen = () => {
+    const address = '123 Fashion Ave, New York, NY 10001';
+    const encodedAddress = encodeURIComponent(address);
+    window.open(`https://maps.google.com/maps?q=${encodedAddress}`, '_blank');
+  };
+
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-gradient-to-b from-black to-gray-900">
+    <section id="contact" ref={sectionRef} className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="contact-title text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
@@ -95,48 +114,61 @@ export const ContactSection = () => {
               <h3 className="text-3xl font-bold text-white mb-8">Let's Connect</h3>
               
               <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                <button 
+                  onClick={handleEmailCopy}
+                  className="flex items-center space-x-4 w-full text-left hover:bg-gray-700/30 p-2 rounded-lg transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center group-hover:bg-yellow-400 transition-colors">
                     <Mail className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">Email</h4>
-                    <p className="text-gray-300">hello@luxebrand.com</p>
+                    <h4 className="text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors">Email</h4>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors">hello@lockuniforms.com</p>
                   </div>
-                </div>
+                </button>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                <button 
+                  onClick={handlePhoneCall}
+                  className="flex items-center space-x-4 w-full text-left hover:bg-gray-700/30 p-2 rounded-lg transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center group-hover:bg-yellow-400 transition-colors">
                     <Phone className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">Phone</h4>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
+                    <h4 className="text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors">Phone</h4>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors">+1 (555) 123-4567</p>
                   </div>
-                </div>
+                </button>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                <button 
+                  onClick={handleMapOpen}
+                  className="flex items-center space-x-4 w-full text-left hover:bg-gray-700/30 p-2 rounded-lg transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center group-hover:bg-yellow-400 transition-colors">
                     <MapPin className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">Address</h4>
-                    <p className="text-gray-300">123 Fashion Ave, New York, NY 10001</p>
+                    <h4 className="text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors">Address</h4>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors">123 Fashion Ave, New York, NY 10001</p>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div className="mt-8 pt-8 border-t border-gray-700">
                 <h4 className="text-lg font-semibold text-white mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
-                  {['Instagram', 'Twitter', 'Facebook', 'LinkedIn'].map((social) => (
-                    <button
-                      key={social}
-                      className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300"
-                    >
-                      <span className="text-sm font-bold">{social[0]}</span>
-                    </button>
-                  ))}
+                  <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                    <Instagram className="w-5 h-5" />
+                  </button>
+                  <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                    <Twitter className="w-5 h-5" />
+                  </button>
+                  <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                    <Facebook className="w-5 h-5" />
+                  </button>
+                  <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-all duration-300">
+                    <Linkedin className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
             </div>
